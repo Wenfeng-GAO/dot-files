@@ -12,20 +12,18 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are plugings we want.
 " Keep Plugin commands between vundle#begin/end.
 
-Plugin 'ZoomWin'
 Plugin 'tComment'
 Plugin 'molokai'
 Plugin 'badwolf'
-Plugin 'Markdown'
 Plugin 'SearchComplete'
 Plugin 'The-NERD-tree'
 Plugin 'ctrlp.vim'
 Plugin 'Syntastic'
 Plugin 'fugitive.vim'
-Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'Auto-Pairs'
 Plugin 'linediff.vim'
 Plugin 'unimpaired.vim'
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()         "required
@@ -46,9 +44,9 @@ let g:badwolf_css_props_highlight=1
 " }}}
 
 " Spaces and tabs {{{
-set tabstop=8     "number of visual spaces per TAB
-set shiftwidth=8  "indents will have a width of 8
-set softtabstop=8 "number of spaces in tab when editing
+set tabstop=4     "number of visual spaces per TAB
+set shiftwidth=4  "indents will have a width of 8
+set softtabstop=4 "number of spaces in tab when editing
 set expandtab     "tabs are spaces
 set autoindent
 " }}}
@@ -68,7 +66,7 @@ set showmatch     "highlight matching [{()}]
 set incsearch     "search as characters are entered
 set hlsearch      "highlight matches
 "turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR> 
+nnoremap <leader><space> :nohlsearch<CR>
 " }}}
 
 " Folding {{{
@@ -76,7 +74,7 @@ set foldenable    "enable folding
 set foldlevelstart=10 "open most folds by default
 set foldnestmax=10    "10 nested fold max
 "space open/close folds
-nnoremap <space> za   
+nnoremap <space> za
 set foldmethod=indent "fold based on indent level
 "opne all folding zR
 "close all folding zM
@@ -85,12 +83,14 @@ set foldmethod=indent "fold based on indent level
 " Leader Shortcuts {{{
 " let mapleader=","    "leader key is comma
 "jk is escape
-inoremap jk <ESC> 
+"inoremap jk <ESC>
 " }}}
 
 " Mappings {{{
 "set a map leader for more sane manner
 let mapleader=','
+"set cursor to the front of line in edit mode
+inoremap <leader>e <ESC>E
 "set cursor to the end of line in edit mode
 inoremap <leader>a <ESC>A
 "shortcut to insert a new line on top of the current line in edit mode
@@ -106,8 +106,8 @@ map <leader>ev :e! ~/.vimrc<cr>
 "edit dotfiles
 map <leader>df :e! ~/dotfiles<cr>
 "scroll the viewport faster
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
+nnoremap <C-e> 4<C-e>
+nnoremap <C-y> 4<C-y>
 
 "active spell-checking alternatives
 nmap ;s :set invspell spelllang=en<cr>
@@ -151,12 +151,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-" }}}
-"vim-markdown-preview {{{
-"hotkey
-let vim_markdown_preview_hotkey='<leader>P'
-let vim_markdown_preview_toggle=1
-let vim_markdown_preview_browser='Safari'
+let g:syntastic_go_checkers = ['golint', 'govet']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
 " }}}
 " NERDTree {{{
 " "show hidden files in NERDTree
@@ -171,11 +168,24 @@ nmap <silent> <leader>r :CtrlPBuffer<cr>
 noremap <leader>lt :Linediff<CR>
 noremap <leader>lto :LinediffReset<CR>
 " }}}
-" ZoomWin {{{
-"use <C-w>o to zoom in and out
-" }}}
 "AutoPairs {{{
 let g:AutoPairsShortcutToggle='<leader>p'
+"}}}
+"Vim-go {{{
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+nnoremap <leader>a :cclose<CR>
+let g:go_fmt_command = "goimports"
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_deadline = "5s"
+let g:go_metalinter_autosave = 1
+let g:go_def_mode = 'godef'
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 "}}}
 " }}}
 
@@ -215,4 +225,5 @@ autocmd BufNewFile *Plan.md r ~/Documents/Plans/Models/2016_01_model.md
 " Organization {{{
 set modelines=3
 " vim: foldmethod=marker: foldlevel=0:
+
 
