@@ -1,6 +1,7 @@
 " Vundle Settings and Plugins {{{
 set nocompatible         "be improved , required
 filetype off             "required
+filetype plugin on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -24,6 +25,9 @@ Plugin 'Auto-Pairs'
 Plugin 'linediff.vim'
 Plugin 'unimpaired.vim'
 Plugin 'fatih/vim-go'
+set rtp+=/usr/local/opt/fzf
+Plugin 'junegunn/fzf.vim'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()         "required
@@ -84,6 +88,7 @@ set foldmethod=indent "fold based on indent level
 " let mapleader=","    "leader key is comma
 "jk is escape
 "inoremap jk <ESC>
+set relativenumber
 " }}}
 
 " Mappings {{{
@@ -186,6 +191,7 @@ autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+" let g:go_guru_scope = ["github.com/...", "golang.org/x/tools"]
 "}}}
 " }}}
 
@@ -225,5 +231,3 @@ autocmd BufNewFile *Plan.md r ~/Documents/Plans/Models/2016_01_model.md
 " Organization {{{
 set modelines=3
 " vim: foldmethod=marker: foldlevel=0:
-
-
