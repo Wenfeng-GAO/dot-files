@@ -99,5 +99,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias rm="echo Use 'del', or the full path i.e. '/bin/rm'"
-alias del="rmtrash"
+
+. /opt/homebrew/etc/profile.d/z.sh
