@@ -113,6 +113,7 @@ map <leader>df :e! ~/dotfiles<cr>
 "scroll the viewport faster
 nnoremap <C-e> 4<C-e>
 nnoremap <C-y> 4<C-y>
+vmap <C-c> :w !pbcopy<CR><CR>
 
 "active spell-checking alternatives
 nmap ;s :set invspell spelllang=en<cr>
